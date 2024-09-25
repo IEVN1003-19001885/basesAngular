@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './ejemplo1.component.html',
   styleUrl: './ejemplo1.component.css'
 })
+
 export class Ejemplo1Component implements OnInit {
   formulario!:FormGroup;
   resultado!:number;

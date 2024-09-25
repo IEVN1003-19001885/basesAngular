@@ -1,33 +1,45 @@
-
-<div>
-    <form>
-        <div>
-            <h2>Cinee</h2>
-            <label >Nombre</label>
-            <input type="text" name="" required><br>
-
-            <label>Cantidad de compradores</label>
-            <input type="number" name="compradores" required><br>
+<div class="container mt-5">
+    <h2>Cineeee</h2>
 
 
-            <label>Tarjeta cineco</label>
-            <input type="radio" name="tarjeta" value="si" required> Si
-            <input type="radio" name="tarjeta" value="no"> No<br>
+    <form [formGroup]="formulario" (ngSubmit)="Compra()">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
         </div>
 
-        <label>Cantidad de Boletos</label>
-        <input type="number" name="boletos" required><br>
-
-        <div>
-            <label for="">Valor a pagar</label>
-            <input type="text" >
+        <div class="form-group">
+            <label for="compradores">Cantidad de Compradores</label>
+            <input type="number" class="form-control" id="compradores" formControlName="compradores" required>
         </div>
 
-        <div>
-            <h2>Acciones</h2>
-            <button  type="submit">Procesar</button>
-            <button  type="submit">Salir</button>
+        <div class="form-group">
+            <label>¿Cuenta con tarjeta CINECO?</label><br>
+            <input type="radio" id="tarjetaSi" formControlName="tarjetaCineco" [value]="true"> Sí
+            <input type="radio" id="tarjetaNo" formControlName="tarjetaCineco" [value]="false"> No
+        </div>
+
+        <div class="form-group">
+            <label for="boletos">Cantidad de Boletos</label>
+            <input type="number" class="form-control" id="boletos" formControlName="boletos" required>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Procesar</button>
+            <button type="button" class="btn btn-danger" (click)="salir()">Salir</button>
         </div>
     </form>
 
+    <div *ngIf="mensaje" class="alert alert-danger mt-4">
+        {{ mensaje }}
+    </div>
+
+    <div *ngIf="total !== null" class="mt-4">
+        <h3>Resultado</h3>
+        <p>Nombre: {{ formulario.get('nombre')?.value }}</p>
+        <p>Compradores: {{ formulario.get('compradores')?.value }}</p>
+        <p>Cantidad de boletos: {{ formulario.get('boletos')?.value }}</p>
+        <p>Total a pagar: ${{ total | number:'1.2-2' }}</p>
+    </div>
 </div>
+
