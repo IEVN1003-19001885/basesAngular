@@ -1,0 +1,26 @@
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+button {
+    width: 20%;
+}
+
+.resultados {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}

@@ -1,1 +1,61 @@
-<p>resistencias works!</p>
+<div class="container">
+    <h2>Resistencias</h2>
+    <form [formGroup]="resistencias" (ngSubmit)="Calcular()">
+    <div class="form-group">
+        <label for="color1">Color 1</label>
+        <select class="form-control" id="color1" formControlName="color1">
+          <option *ngFor="let color of colores" [ngValue]="color">{{ color.nombre }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="color2">Color 2</label>
+        <select class="form-control" id="color2" formControlName="color2">
+          <option *ngFor="let color of colores" [ngValue]="color">{{ color.nombre }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="color3">Color 3</label>
+        <select class="form-control" id="color3" formControlName="color3">
+          <option *ngFor="let color of colores" [ngValue]="color">{{ color.nombre }}</option>
+        </select>
+    </div>
+
+    <!-- Selección de tolerancia -->
+    <div class="form-group">
+        <label>Tolerancia</label><br>
+        <input type="radio" id="oro" formControlName="tolerancia" [value]="5" (change)="updateToleranciaColor('dorado')"> Dorado
+        <input type="radio" id="plata" formControlName="tolerancia" [value]="10" (change)="updateToleranciaColor('plata')"> Plata
+    </div>
+
+    <button type="submit" class="btn btn-warning" [disabled]="!resistencias.valid">Registrar</button>
+    </form>
+
+    <div *ngIf="resultado" class="resultados mt-4">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Color 1</th>
+            <th>Color 2</th>
+            <th>Color 3</th>
+            <th>Tolerancia</th>
+            <th>Valor</th>
+            <th>Valor Máximo</th>
+            <th>Valor Mínimo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td [ngStyle]="{'background-color': getColorStyle(color1)}">{{ color1.nombre }}</td>
+            <td [ngStyle]="{'background-color': getColorStyle(color2)}">{{ color2.nombre }}</td>
+            <td [ngStyle]="{'background-color': getColorStyle(color3)}">{{ color3.nombre }}</td>
+            <td [ngStyle]="{'background-color': toleranciaColor}">{{ tolerancia }}%</td>
+            <td>{{ valor }} Ω</td>
+            <td>{{ valorMaximo }} Ω</td>
+            <td>{{ valorMinimo }} Ω</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
